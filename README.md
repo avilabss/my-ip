@@ -24,5 +24,5 @@ uvicorn main:app --reload
 
 ### Note
 
-Generate token from [IP Info](https://ipinfo.io/) and set to environment variable as `IP_INFO_API_TOKEN=my_token`
-<ins>/detail</ins> and <ins>/detail/{ip}</ins> endpoint requires a token to work
+- Generate token from [IP Info](https://ipinfo.io/) and set to environment variable as `IP_INFO_API_TOKEN=my_token`
+- <ins>/detail</ins> and <ins>/detail/{ip}</ins> endpoint requires a token to work
