@@ -45,12 +45,10 @@ async def _get_full_ip_details(client_host: str) -> dict:
 # Route handlers
 @app.get("/")
 async def root(request: Request):
-    client_host = request.client.host
+    # client_host = request.client.host
+    client_host = request.headers.getlist("X-Forwarded-For")[0]
 
-    nom_test = request.headers.getlist("X-Forwarded-For")[0]
-    print(f"Works -> {nom_test}!")
-
-    return {"ip": nom_test}
+    return {"ip": client_host}
 
 
 @app.get("/ping")
@@ -60,7 +58,8 @@ async def ping():
 
 @app.get("/detail")
 async def my_ip_details(request: Request):
-    client_host = request.client.host
+    # client_host = request.client.host
+    client_host = request.headers.getlist("X-Forwarded-For")[0]
 
     if not ip_info_features:
         raise HTTPException(status_code=404, detail="Failed to get ip details")
@@ -89,7 +88,8 @@ async def ip_details(ip: str):
 
 @app.get("/full-detail")
 async def my_ip_full_details(request: Request):
-    client_host = request.client.host
+    # client_host = request.client.host
+    client_host = request.headers.getlist("X-Forwarded-For")[0]
 
     try:
         ip_details = await _get_full_ip_details(client_host)
