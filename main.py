@@ -46,6 +46,8 @@ async def _get_full_ip_details(client_host: str) -> dict:
 @app.get("/")
 async def root(request: Request):
     client_host = request.client.host
+    nom_test = request.headers.getlist("X-Forwarded-For")[0]
+    print(f"***************IP -> {nom_test}!!!")
     return {"ip": client_host}
 
 
